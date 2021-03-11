@@ -1,5 +1,5 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
-import { Data } from './data.model';
+import {Data} from './data.model';
 
 @model()
 export class Pot extends Entity {
@@ -12,6 +12,9 @@ export class Pot extends Entity {
 
   @property()
   name: string;
+
+  @property()
+  macAddress: string;
 
   @hasMany(() => Data)
   datas?: Data[];
