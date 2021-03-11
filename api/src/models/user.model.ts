@@ -1,7 +1,7 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
 import { Pot } from './pot.model';
 
-@model({settings: {strict: false}})
+@model()
 export class User extends Entity {
   // Define well-known properties here
 
