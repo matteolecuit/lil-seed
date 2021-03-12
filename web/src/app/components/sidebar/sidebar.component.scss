@@ -1,0 +1,97 @@
+#navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    max-width: 150px;
+    width: 150px;
+
+    @media screen and (max-width: 640px) {
+        flex-direction: row;
+        justify-content: space-between;
+        height: 80px;
+        max-width: 100vw;
+        width: 100vw;
+    }
+
+    .n-logo {
+        .logo {
+            background: url("https://image.flaticon.com/icons/png/512/628/628283.png") center no-repeat;
+            background-size: cover;
+            border-radius: 50%;
+            margin-top: 20px;
+            height: 50px;
+            width: 50px;
+
+            @media screen and (max-width: 640px) {
+                margin: 20px;
+            }
+        }
+    }
+
+    .n-items {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        @media screen and (max-width: 640px) {
+            flex-direction: row;
+        }
+
+        .ni-item {
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+            color: #B8C5D3;
+            transition: color 0.3s;
+            text-decoration: none;
+
+            @media screen and (max-width: 640px) {
+                margin: 0 20px;
+            }
+
+            .item-wrapper {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+
+                span {
+                    @media screen and (max-width: 640px) {
+                        display: none;
+                    }
+                }
+            }
+
+            &:hover,
+            &.active {
+                transition: color 0.3s;
+                color: #4072EE;
+                cursor: pointer;
+            }
+
+            i {
+                
+                font-size: 1.5rem;
+                margin: 0 5px 0 0;
+            } 
+        }
+    }
+
+    .n-profile {
+        .profile {
+            background: url("https://img.lemde.fr/2020/11/18/494/0/8688/4340/1440/720/60/0/7d2c869_856070765-jul-fifou-0888.jpg") center no-repeat;
+            background-size: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            height: 50px;
+            width: 50px;
+
+            @media screen and (max-width: 640px) {
+                margin: 20px;
+            }
+        }
+    }
+}
