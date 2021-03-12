@@ -16,11 +16,15 @@
     }
 
     .aw-content {
+        margin-left: 150px;
         flex: auto;
         height: 100%;
         background-color: #F5F6FA;
+        overflow: scroll;
 
         @media screen and (max-width: 640px) {
+            margin-left: 0;
+            margin-bottom: 80px;
             height: auto;
             width: 100%;
         }

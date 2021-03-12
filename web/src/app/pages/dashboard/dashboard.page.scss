@@ -1,0 +1,89 @@
+#dashboard {
+    margin: 40px;
+
+    .page-title {
+        font-size: 2rem;
+        font-weight: 400;
+        color: #31394D;
+    }
+
+    .main-diagram {
+        background-color: #FFF;
+        border-radius: 5px;
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #31394D;
+            padding: 20px;
+        }
+        
+
+        .md-diagram-wrapper {
+            height: 400px;
+
+            canvas {
+                padding: 10px 20px;
+                box-sizing: border-box;
+                height: 100%;
+                width: 100%;
+            }
+        }        
+    }
+
+    .sub-diagrams {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+
+        @media screen and (max-width: 640px) {
+            flex-direction: column;
+        }
+
+        .sd-diagram-item {
+            background-color: #FFF;
+            border-radius: 5px;
+            flex: 1;
+            margin: 0 20px;
+
+            @media screen and (max-width: 640px) {
+                margin: 20px 0;
+            }
+
+            &:first-child {
+                margin: 0 20px 0 0;
+                
+                @media screen and (max-width: 640px) {
+                    margin: 0 0 20px 0;
+                }
+            }
+    
+            &:last-child {
+                margin: 0 0 0 20px;
+
+                @media screen and (max-width: 640px) {
+                    margin: 20px 0 0 0;
+                }
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                font-weight: 400;
+                color: #31394D;
+                padding: 20px;
+            }
+
+            .sddi-diagram-wrapper {
+                height: 400px;
+
+                canvas {
+                    padding: 10px 20px;
+                    box-sizing: border-box;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+

@@ -1,1 +1,51 @@
-<p>dashboard works!</p>
+<div id="dashboard">
+    <h1 class="page-title">Dashboard</h1>
+
+    
+    <div class="main-diagram">
+        <h2>Temperatures</h2>
+        <div class="md-diagram-wrapper">
+            <canvas baseChart width="400" height="400"
+                [datasets]="temperaturesChartData"
+                [labels]="temperaturesChartLabels"
+                [options]="temperaturesChartOptions"
+                [colors]="temperaturesChartColors"
+                [legend]="temperaturesChartLegend"
+                [chartType]="temperaturesChartType"
+                [plugins]="temperaturesChartPlugins">
+            </canvas>
+        </div>
+    </div>
+
+    <div class="sub-diagrams">
+        <div class="sd-diagram-item">
+            <h2>Hygrometry</h2>
+            <div class="sddi-diagram-wrapper">
+                <canvas baseChart width="400" height="400"
+                    [datasets]="hygrometryChartData"
+                    [labels]="hygrometryChartLabels"
+                    [options]="hygrometryChartOptions"
+                    [colors]="hygrometryChartColors"
+                    [legend]="hygrometryChartLegend"
+                    [chartType]="hygrometryChartType"
+                    [plugins]="hygrometryChartPlugins">
+                </canvas>
+            </div>
+        </div>
+
+        <div class="sd-diagram-item">
+            <h2>Light</h2>
+            <div class="sddi-diagram-wrapper">
+                <canvas baseChart width="400" height="400"
+                    [datasets]="hygrometryChartData"
+                    [labels]="hygrometryChartLabels"
+                    [options]="hygrometryChartOptions"
+                    [colors]="hygrometryChartColors"
+                    [legend]="hygrometryChartLegend"
+                    [chartType]="hygrometryChartType"
+                    [plugins]="hygrometryChartPlugins">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
