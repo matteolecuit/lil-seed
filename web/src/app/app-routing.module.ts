@@ -27,6 +27,11 @@ const routes: Routes = [
 				path: "profile",
 				component: ProfilePage
 			},
+			{
+				path: "",
+				pathMatch: "full",
+				redirectTo: "dashboard"
+			},
 		]
 	},
 	{
