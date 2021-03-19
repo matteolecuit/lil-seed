@@ -1,7 +1,11 @@
 import RPi.GPIO as GPIO
-import dht11
-import time
+import dht11, time, serial
 from service import callApi
+import json
+
+# initialize Serial
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+ser.flush()
 
 # initialize GPIO
 GPIO.setwarnings(False)
@@ -17,19 +21,14 @@ def temperature_and_humidity_sensor(pin):
     else:
         return bad_result, bad_result
 
-def water_sensor(pin):
-	GPIO.setup(pin, GPIO.IN)
-	if GPIO.input(pin):
-		return False
-	else:
-		return True
-
-def luminosity_sensor(pin):
-	GPIO.setup(pin, GPIO.IN)
-	if GPIO.input(pin):
-		return False
-	else:
-		return True
+def water_luminosity():
+	if ser.in_waiting > 0:
+		jsonString = ser.readline().decode('utf-8').rstrip()
+		try:
+			jsonObject = json.loads(jsonString)
+			return jsonObject["water"], jsonObject["lumen"]
+		except:
+			pass
 
 oldTemperature = None
 oldHumidity = None
@@ -37,9 +36,9 @@ oldWater = None
 oldLuminosity = None
 
 while True : 
+	water, luminosity = water_luminosity()
+
 	temperature, humidity = temperature_and_humidity_sensor(27) 
-	water = water_sensor(17)
-	luminosity = luminosity_sensor(22)
 
 	print("Temperature: %-3.1f C" % temperature) 
 	print("Humidity: %-3.1f %%" % humidity)
