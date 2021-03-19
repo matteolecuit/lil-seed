@@ -3,10 +3,13 @@ import {Pot} from './pot.model';
 
 @model()
 export class User extends Entity {
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @hasMany(() => Pot)
+  pots: Pot[];
   [prop: string]: any;
 
   @property({
@@ -17,9 +20,6 @@ export class User extends Entity {
   @property() firstName: string;
 
   @property() password: string;
-
-  @hasMany(() => Pot)
-  pots?: Pot[];
 
   constructor(data?: Partial<User>) {
     super(data);
