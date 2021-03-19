@@ -17,13 +17,10 @@ export class Pot extends Entity {
   @property()
   macAddress: string;
 
-  @hasMany(() => Data)
-  datas?: Data[];
-
   @property({
     type: 'string',
   })
-  userId: string;
+  userId?: string;
 
   @hasMany(() => Data)
   data: Data[];
