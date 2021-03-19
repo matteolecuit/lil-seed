@@ -4,11 +4,11 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'lilseed_db',
   connector: 'mysql',
-  url: 'mysql://root@localhost:3306/lilseed_db',
+  url: 'mysql://admin:P@ssw0rd@localhost:3306/lilseed_db',
   host: 'localhost',
   port: 3306,
-  user: 'root',
-  password: '',
+  user: 'admin',
+  password: 'P@ssw0rd',
   database: 'lilseed_db'
 };
 

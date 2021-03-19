@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PotsService {
-    constructor(private http: HttpClient) {}
-
+    constructor(private http: HttpClient) {
+    }
     localUrl = 'http://localhost:3000/pots';
 
     getPots() {
