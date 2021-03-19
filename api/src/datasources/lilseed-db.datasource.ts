@@ -4,7 +4,7 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'lilseed_db',
   connector: 'mysql',
-  url: 'mysql://srv-captain--database-db/lilseed_db',
+  url: 'mysql://root@srv-captain--database-db/lilseed_db',
   host: 'localhost',
   port: 3306,
   user: 'root',
