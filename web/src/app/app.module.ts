@@ -4,7 +4,6 @@ import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPage } from './pages/login/login.page';
@@ -20,28 +19,28 @@ import { PotCardComponent } from './components/pot-card/pot-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginPage,
-    DashboardPage,
-    ProfilePage,
-    PotPage,
-    AddPotPage,
-    AddPotNamePage,
-    MyPotsPage,
-    SidebarComponent,
-    HomePage,
-    PotCardComponent,
-    ProgressBarComponent,
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    ChartsModule,
-    HttpClientModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginPage,
+        DashboardPage,
+        ProfilePage,
+        PotPage,
+        AddPotPage,
+        AddPotNamePage,
+        MyPotsPage,
+        SidebarComponent,
+        HomePage,
+        PotCardComponent,
+        ProgressBarComponent,
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        ChartsModule,
+        HttpClientModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
