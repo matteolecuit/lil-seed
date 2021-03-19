@@ -1,5 +1,6 @@
-import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Entity, hasMany, hasOne, model, property} from '@loopback/repository';
 import {Data} from './data.model';
+import { User } from './user.model';
 
 @model()
 export class Pot extends Entity {
@@ -16,9 +17,13 @@ export class Pot extends Entity {
   @property()
   macAddress: string;
 
-  @hasMany(() => Data)
-  datas?: Data[];
+  @property({
+    type: 'string',
+  })
+  userId?: string;
 
+  @hasMany(() => Data)
+  data: Data[];
 
   constructor(data?: Partial<Pot>) {
     super(data);

@@ -15,6 +15,11 @@ export class Data extends Entity {
   @property()
   insert_date: Date;
 
+  @property({
+    type: 'number',
+  })
+  potId: number;
+
   constructor(data?: Partial<Data>) {
     super(data);
   }
