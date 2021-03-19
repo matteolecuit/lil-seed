@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { PotsService  } from '../../services/pots.service'
 
 @Component({
 	selector: 'app-dashboard',
@@ -46,10 +47,13 @@ export class DashboardPage implements OnInit {
 	public hygrometryChartLegend = true;
 	public hygrometryChartType = 'line';
 	public hygrometryChartPlugins = [];
+	
+	public tabPots : any = [];
 
-	constructor() { }
+	constructor(private apiPots : PotsService) { }
 
 	ngOnInit(): void {
+		
 	}
 
 }
