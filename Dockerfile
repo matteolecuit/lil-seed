@@ -1,5 +1,5 @@
 # Check out https://hub.docker.com/_/node to select a new base image
-FROM node:10-slim
+FROM node:slim
 
 # Create app directory (with user `node`)
 RUN mkdir -p /home/node/app
