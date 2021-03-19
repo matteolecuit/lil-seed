@@ -1,1 +1,29 @@
-<p>pots works!</p>
+<div id="pot-page">
+    <h1 class="page-title">{{pot.name}}</h1>
+
+    <div class="pot-stats">
+        <div class="pt-header">
+            <span class="pth-title">Statistics</span>
+            <div class="pth-time-range">
+                <span>for</span>
+                <select name="pot-time-range" id="pot-time-range">
+                    <option value="0321">Mars 2021</option>
+                    <option value="0221">Février 2021</option>
+                    <option value="0121">Janvier 2021</option>
+                    <option value="1220">Décembre 2020</option>
+                    <option value="1120">Novembre 2020</option>
+                    <option value="1020">Octobre 2020</option>
+                    <option value="0920">Septembre 2020</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pt-content">
+            <div class="ptc-stat" *ngFor="let stat of pot.stats">
+                <span class="ptcs-title">{{stat.name}}</span>
+                <ls-progress-bar value="{{stat.value / stat.maxValue * 100}}" color="{{stat.color}}"></ls-progress-bar>
+                <span class="ptcs-value">{{stat.value}}</span>
+            </div>
+        </div>
+    </div>
+</div>
