@@ -1,5 +1,5 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
-import { Pot } from './pot.model';
+import {Pot} from './pot.model';
 
 @model()
 export class User extends Entity {
@@ -11,15 +11,10 @@ export class User extends Entity {
 
   @property({
     id: true,
-    generated: true
   })
-  id: number;
-
-  @property() name: string;
+  username: string;
 
   @property() firstName: string;
-
-  @property() email: string;
 
   @property() password: string;
 

@@ -21,6 +21,7 @@ import {
   requestBody,
   response
 } from '@loopback/rest';
+import {secured, SecuredType} from '../auth';
 import {Pot} from '../models';
 import {PotRepository} from '../repositories';
 
@@ -31,6 +32,7 @@ export class PotController {
   ) { }
 
   @post('/pots')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Pot model instance',
     content: {'application/json': {schema: getModelSchemaRef(Pot)}},
@@ -52,6 +54,7 @@ export class PotController {
   }
 
   @get('/pots/count')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Pot model count',
     content: {'application/json': {schema: CountSchema}},
@@ -63,6 +66,7 @@ export class PotController {
   }
 
   @get('/pots')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Array of Pot model instances',
     content: {
@@ -81,6 +85,7 @@ export class PotController {
   }
 
   @patch('/pots')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Pot PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -100,6 +105,7 @@ export class PotController {
   }
 
   @get('/pots/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Pot model instance',
     content: {
@@ -116,6 +122,7 @@ export class PotController {
   }
 
   @patch('/pots/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'Pot PATCH success',
   })
@@ -134,6 +141,7 @@ export class PotController {
   }
 
   @put('/pots/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'Pot PUT success',
   })
@@ -145,6 +153,7 @@ export class PotController {
   }
 
   @del('/pots/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'Pot DELETE success',
   })

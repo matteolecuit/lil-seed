@@ -4,27 +4,31 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
+  del, get,
   getModelSchemaRef,
-  patch,
+  HttpErrors, param,
+  patch, post,
   put,
-  del,
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
+import {compare, hash} from 'bcryptjs';
+import {promisify} from 'util';
+import {Credentials, JWT_SECRET, secured, SecuredType} from '../auth';
 import {User} from '../models';
 import {UserRepository} from '../repositories';
 
+const {sign} = require('jsonwebtoken');
+const signAsync = promisify(sign);
 export class UserController {
   constructor(
     @repository(UserRepository)
-    public userRepository : UserRepository,
-  ) {}
+    public userRepository: UserRepository,
+
+  ) { }
 
   @post('/users')
   @response(200, {
@@ -42,12 +46,15 @@ export class UserController {
         },
       },
     })
-    user: Omit<User, 'id'>,
+    user: Omit<User, 'password'>,
   ): Promise<User> {
+    const password = await hash(user.password, 10);
+    user.password = password;
     return this.userRepository.create(user);
   }
 
   @get('/users/count')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'User model count',
     content: {'application/json': {schema: CountSchema}},
@@ -57,8 +64,8 @@ export class UserController {
   ): Promise<Count> {
     return this.userRepository.count(where);
   }
-
   @get('/users')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Array of User model instances',
     content: {
@@ -77,6 +84,7 @@ export class UserController {
   }
 
   @patch('/users')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'User PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -96,6 +104,7 @@ export class UserController {
   }
 
   @get('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'User model instance',
     content: {
@@ -112,6 +121,7 @@ export class UserController {
   }
 
   @patch('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'User PATCH success',
   })
@@ -130,6 +140,7 @@ export class UserController {
   }
 
   @put('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'User PUT success',
   })
@@ -141,10 +152,31 @@ export class UserController {
   }
 
   @del('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'User DELETE success',
   })
   async deleteById(@param.path.number('id') id: number): Promise<void> {
     await this.userRepository.deleteById(id);
+  }
+
+  @post('/users/login')
+  async login(@requestBody() credentials: Credentials) {
+    if (!credentials.username || !credentials.password) throw new HttpErrors.BadRequest('Missing Username or Password');
+    const user = await this.userRepository.findOne({where: {username: credentials.username}});
+    if (!user) throw new HttpErrors.Unauthorized('Invalid credentials');
+
+    const isPasswordMatched = await compare(credentials.password, user.password);
+    if (!isPasswordMatched) throw new HttpErrors.Unauthorized('Invalid credentials');
+
+    const tokenObject = {username: credentials.username};
+    const token = await signAsync(tokenObject, JWT_SECRET);
+    const {id, email} = user;
+
+    return {
+      token,
+      id: id as string,
+      email,
+    };
   }
 }
