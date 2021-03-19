@@ -29,6 +29,7 @@ def water_luminosity():
 			return jsonObject["water"], jsonObject["lumen"]
 		except:
 			pass
+	return -1, -1
 
 oldTemperature = None
 oldHumidity = None

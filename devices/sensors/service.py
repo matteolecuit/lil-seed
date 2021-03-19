@@ -2,11 +2,17 @@ import requests
 import pickle
 
 def callApi(data):
-    url = "localhost:5000"
-    print("Call to API :", url, "with data :", data, "\n")
+    url = "https://lilseed-back.serveurspaul.duckdns.org/users/login"
+    data = {"username": "lilseed", "password": "password"}
+
+    # url = "https://lilseed-back.serveurspaul.duckdns.org/"
+    # lilseed
+    # password
+    # print("Call to API :", url, "with data :", data, "\n")
     
     try:
-        requests.post(url, data)
+        res = requests.post(url, json = data)
+        print(res.json()["token"])
     except:
         pass
 
