@@ -1,11 +1,12 @@
 import {inject} from '@loopback/core';
 import {
-  Request,
-  RestBindings,
-  get,
+  get, Request,
+
+
   response,
-  ResponseObject,
+  ResponseObject, RestBindings
 } from '@loopback/rest';
+import {secured, SecuredType} from '../auth';
 
 /**
  * OpenAPI response for ping()
@@ -38,7 +39,7 @@ const PING_RESPONSE: ResponseObject = {
  * A simple controller to bounce back http requests
  */
 export class PingController {
-  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
+  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
 
   // Map to `GET /ping`
   @get('/ping')
@@ -51,5 +52,35 @@ export class PingController {
       url: this.req.url,
       headers: Object.assign({}, this.req.headers),
     };
+  }
+
+  // test endpoints here
+
+  @get('/ping/is-authenticated')
+  @secured(SecuredType.IS_AUTHENTICATED)
+  testIsAuthenticated() {
+    return {message: 'isAuthenticated: OK'};
+  }
+
+  @get('/ping/permit-all')
+  @secured(SecuredType.PERMIT_ALL)
+  testPermitAll() {
+    return {message: 'permitAll: OK'};
+  }
+
+  @get('/ping/deny-all')
+  @secured(SecuredType.DENY_ALL)
+  testDenyAll() {
+    return {message: 'denyAll: OK'};
+  }
+
+  @get('/ping/has-any-role')
+  testHasAnyRole() {
+    return {message: 'hasAnyRole: OK'};
+  }
+
+  @get('/ping/has-roles')
+  testHasRoles() {
+    return {message: 'hasRoles: OK'};
   }
 }
