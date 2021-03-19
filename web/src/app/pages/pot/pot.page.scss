@@ -1,0 +1,65 @@
+#pot-page {
+    margin: 40px;
+
+    .page-title {
+        text-transform: capitalize;
+        font-size: 2rem;
+        font-weight: 400;
+        color: #31394D;
+        margin-bottom: 50px;
+    }
+
+    .pot-stats {
+        background-color: #FFF;
+        padding: 30px 50px;
+        border-radius: 5px;
+
+        .pt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+
+            .pth-title {
+
+            }
+
+            .pth-time-range {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .pt-content {
+            width: 100%;
+
+            .ptc-stat {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-between;
+                width: 100%;
+                min-height: 75px;
+                margin: 20px 0;
+
+                span {
+                    width: 100%;
+                }
+
+                .ptcs-title {
+                    text-align: left;
+                    text-transform: capitalize;
+                }
+
+                .ptcs-value {
+                    text-align: right;
+                }
+
+                ls-progress-bar {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

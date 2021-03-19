@@ -4,29 +4,35 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
+  del, get,
+  getModelSchemaRef, param,
+
+
+  patch, post,
+
+
+
+
   put,
-  del,
+
   requestBody,
-  response,
+  response
 } from '@loopback/rest';
+import {secured, SecuredType} from '../auth';
 import {Data} from '../models';
 import {DataRepository} from '../repositories';
 
 export class DataController {
   constructor(
     @repository(DataRepository)
-    public dataRepository : DataRepository,
-  ) {}
+    public dataRepository: DataRepository,
+  ) { }
 
   @post('/data')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Data model instance',
     content: {'application/json': {schema: getModelSchemaRef(Data)}},
@@ -48,6 +54,7 @@ export class DataController {
   }
 
   @get('/data/count')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Data model count',
     content: {'application/json': {schema: CountSchema}},
@@ -59,6 +66,7 @@ export class DataController {
   }
 
   @get('/data')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Array of Data model instances',
     content: {
@@ -77,6 +85,7 @@ export class DataController {
   }
 
   @patch('/data')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Data PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -96,6 +105,7 @@ export class DataController {
   }
 
   @get('/data/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'Data model instance',
     content: {
@@ -112,6 +122,7 @@ export class DataController {
   }
 
   @patch('/data/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'Data PATCH success',
   })
@@ -130,6 +141,7 @@ export class DataController {
   }
 
   @put('/data/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'Data PUT success',
   })
@@ -141,6 +153,7 @@ export class DataController {
   }
 
   @del('/data/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'Data DELETE success',
   })

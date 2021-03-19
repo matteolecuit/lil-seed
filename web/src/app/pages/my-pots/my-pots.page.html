@@ -1,3 +1,7 @@
 <div id="myPots">
     <h1 class="page-title">My Pots</h1>
+
+    <div class="pot-cards-wrapper">
+        <a *ngFor="let pot of pots; let index = index" routerLink="/pots/{{index}}"><ls-pot-card [pot]="pot"></ls-pot-card></a>
+    </div>
 </div>

@@ -1,37 +1,41 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class PotsService {
+    constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { 
-  }
+    localUrl = 'http://localhost:3000/pots';
 
-  localUrl = 'http://localhost:3000/pots';
+    getPots() {
+        return this.http.get(this.localUrl);
+    }
 
-  getPots() {
-    return this.http.get(this.localUrl);
-  }
+    postPot(name, macAddress) {
+        return this.http.post<any>(this.localUrl, {
+            name: name,
+            macAddress: macAddress,
+        });
+    }
 
-  postPot(name, macAddress) {
-    return this.http.post<any>(this.localUrl, { name: name, macAddress: macAddress});
-  }
+    getPotById(id) {
+        return this.http.get(this.localUrl + '/' + id);
+    }
 
-  getPotById(id) {
-    return this.http.get(this.localUrl + "/" + id);
-  }
+    putPotById(id, name, macAddress) {
+        return this.http.put<any>(this.localUrl + '/' + id, {
+            name: name,
+            macAddress: macAddress,
+        });
+    }
 
-  putPotById(id, name, macAddress){
-    return this.http.put<any>(this.localUrl + "/" + id, {name: name, macAddress: macAddress});
-  }
+    patchPotById(id, name) {
+        return this.http.patch<any>(this.localUrl + '/' + id, { name: name });
+    }
 
-  patchPotById(id, name) {
-    return this.http.patch<any>(this.localUrl + "/" + id, {name: name});
-  }
-
-  deletePotById(id){
-    return this.http.delete(this.localUrl + "/" + id);
-  }
+    deletePotById(id) {
+        return this.http.delete(this.localUrl + '/' + id);
+    }
 }
