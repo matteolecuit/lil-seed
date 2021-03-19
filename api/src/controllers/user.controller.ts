@@ -54,6 +54,7 @@ export class UserController {
   }
 
   @get('/users/count')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'User model count',
     content: {'application/json': {schema: CountSchema}},
@@ -83,6 +84,7 @@ export class UserController {
   }
 
   @patch('/users')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'User PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -102,6 +104,7 @@ export class UserController {
   }
 
   @get('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(200, {
     description: 'User model instance',
     content: {
@@ -118,6 +121,7 @@ export class UserController {
   }
 
   @patch('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'User PATCH success',
   })
@@ -136,6 +140,7 @@ export class UserController {
   }
 
   @put('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'User PUT success',
   })
@@ -147,6 +152,7 @@ export class UserController {
   }
 
   @del('/users/{id}')
+  @secured(SecuredType.IS_AUTHENTICATED)
   @response(204, {
     description: 'User DELETE success',
   })
