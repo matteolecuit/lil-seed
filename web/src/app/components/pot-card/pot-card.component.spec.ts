@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PotsPage } from './pots.page';
+import { PotCardComponent } from './pot-card.component';
 
-describe('PotsPage', () => {
-  let component: PotsPage;
-  let fixture: ComponentFixture<PotsPage>;
+describe('PotCardComponent', () => {
+  let component: PotCardComponent;
+  let fixture: ComponentFixture<PotCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PotsPage ]
+      declarations: [ PotCardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PotsPage);
+    fixture = TestBed.createComponent(PotCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

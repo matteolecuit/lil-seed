@@ -4,6 +4,7 @@ import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { HomePage } from './pages/home/home.page';
 import { LoginPage } from './pages/login/login.page';
 import { MyPotsPage } from './pages/my-pots/my-pots.page';
+import { PotPage } from './pages/pot/pot.page';
 import { ProfilePage } from './pages/profile/profile.page';
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
 			{
 				path: "pots",
 				component: MyPotsPage
+			},
+			{
+				path: "pots/:id",
+				component: PotPage
 			},
 			{
 				path: "profile",
