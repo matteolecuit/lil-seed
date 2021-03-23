@@ -15,6 +15,7 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
+import { secured, SecuredType } from '../auth';
 import {
   Pot,
   Data,
@@ -38,6 +39,7 @@ export class PotDataController {
       },
     },
   })
+  @secured(SecuredType.IS_AUTHENTICATED)
   async find(
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Data>,
@@ -53,6 +55,7 @@ export class PotDataController {
       },
     },
   })
+  @secured(SecuredType.IS_AUTHENTICATED)
   async create(
     @param.path.number('id') id: typeof Pot.prototype.id,
     @requestBody({
@@ -78,6 +81,7 @@ export class PotDataController {
       },
     },
   })
+  @secured(SecuredType.IS_AUTHENTICATED)
   async patch(
     @param.path.number('id') id: number,
     @requestBody({
@@ -101,6 +105,7 @@ export class PotDataController {
       },
     },
   })
+  @secured(SecuredType.IS_AUTHENTICATED)
   async delete(
     @param.path.number('id') id: number,
     @param.query.object('where', getWhereSchemaFor(Data)) where?: Where<Data>,
