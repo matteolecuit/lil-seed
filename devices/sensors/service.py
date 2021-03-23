@@ -1,5 +1,4 @@
-import requests
-import pickle
+import requests, pickle, sys
 
 def callApi(data):
     connUrl = "https://lilseed-back.serveurspaul.duckdns.org/users/login"
@@ -8,15 +7,16 @@ def callApi(data):
     try:
         connReq = requests.post(connUrl, json = connData)
         if len(connReq.json()["token"].strip()) > 0:
-            addPotUrl = "https://lilseed-back.serveurspaul.duckdns.org//users/" + connReq.json()["token"] + "pots"
+            # Token ??
+            addPotUrl = "https://lilseed-back.serveurspaul.duckdns.org/users/" + connData["username"] + "/pots"
             addPotData = {
                 "name": "Pot de la kouisine",
                 "macAddress": "00:00:00:00"
             }
-            print(addPotUrl)
             addPotReq = requests.post(addPotUrl, json = addPotData)
             print(addPotReq.json())
     except:
+        print(sys.exc_info()[0])
         pass
 
 def loadData():
