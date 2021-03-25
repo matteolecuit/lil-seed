@@ -10,7 +10,6 @@ export class PotCardComponent implements OnInit {
   name: string;
 
   constructor() { 
-    console.log(this.pot);
   }
 
   ngOnInit(): void {

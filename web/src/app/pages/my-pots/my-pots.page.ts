@@ -21,7 +21,6 @@ export class MyPotsPage implements OnInit {
 
     ngOnInit(): void {
         this.apiPots.getPots().subscribe((data) => {
-            console.log(data);
             for (const d of data as any) {
                 this.tabPots.push({
                     id: d.id,
@@ -40,13 +39,11 @@ export class MyPotsPage implements OnInit {
             })
             .then((postId) =>
                 this.apiPots.getPotById(postId).subscribe((data) => {
-                    console.log(data);
                     return data;
                 })
             )
             .then((postId) => {
                 this.apiPots.deletePotById(this.postId).subscribe((data) => {
-                    console.log(data);
                 });
             });
     }

@@ -1,5 +1,9 @@
 
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PotsService } from '@services/pots.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-pot',
   templateUrl: './pot.page.html',
@@ -7,8 +11,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PotPage implements OnInit {
   @Input() pot: any;
+  private routeSub: Subscription;
 
-  constructor() {
+  constructor(private apiPots: PotsService, private route: ActivatedRoute) {
     this.pot = {
       name: "Salon - Pétunia",
       stats: [
@@ -41,6 +46,13 @@ export class PotPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.routeSub = this.route.params.subscribe(params => {
+      console.log(params['id']);
+
+      this.apiPots.getPotById(params['id']).subscribe((data) => {
+        console.log(data);
+    });
+    });
   }
 
 }
