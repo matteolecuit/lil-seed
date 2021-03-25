@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import dht11, time, serial
-from service import callApi
+from service import sendData
 import json
 
 # initialize Serial
@@ -47,7 +47,7 @@ while True :
 	print("Luminosity:", luminosity, "\n")
 	
 	if(oldTemperature != temperature or oldHumidity != humidity or oldWater != water or oldLuminosity != luminosity ):
-		callApi({
+		sendData({
 			'temperature' : temperature, 
 			'humidity': humidity,
 			'water' : water,
