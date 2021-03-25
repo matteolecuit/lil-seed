@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request
 from wifi import Cell, Scheme
+from sensors import start_pot
 
 iwifi = 'wlan0'
 iname = 'home'
@@ -18,7 +19,8 @@ def form():
 @app.route('/data', methods = ['POST', 'GET'])
 def data():
     if request.method == 'GET':
-        return f"The URL /data is accessed directly. Try going to '/form' to submit form"
+        start_pot()
+        return f"pot started"
     if request.method == 'POST':
         form_data = request.form.to_dict()
         index = int(form_data['Wifi'])
@@ -32,7 +34,7 @@ def data():
             print('Scheme already exists')
             scheme = Scheme.find(iwifi, iname)
         scheme.activate()
-        
+        start_pot()
         return render_template('data.html',form_data = form_data)
  
  

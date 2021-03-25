@@ -1,4 +1,5 @@
 import requests, pickle, sys, traceback
+from uuid import getnode as get_mac
 
 USERNAME = "lilseed"
 PASSWORD = "password"
@@ -12,7 +13,7 @@ def linkPotToUser(data):
     global id_pot
 
     connUrl = "https://lilseed-back.serveurspaul.duckdns.org/users/login"
-    connData = {"username": USERNAME, "password": PASSWORD}
+    connData = {"username": "lilseed", "password": "password"}
     
     try:
         if len(token.strip()) <= 0:
@@ -22,21 +23,21 @@ def linkPotToUser(data):
 
         linkPotUrl = "https://lilseed-back.serveurspaul.duckdns.org/users/" + connData["username"] + "/pots"
         linkPotData = {
-            "macAddress": "00:00:00:00"
+            "macAddress": str(get_mac())
         }
         addPotReq = requests.post(linkPotUrl, json = linkPotData, headers = {"Authorization" : "Bearer " + token})
         print(addPotReq.status_code)
         id_pot = addPotReq.json()['id']
         print(id_pot)
+        return id_pot
     except:
         print(sys.exc_info())
-        pass
+        return -1
 
-def sendData(data):
+def sendData(id_pot, data):
     global USERNAME
     global PASSWORD
     global token
-    global id_pot
     
     print(id_pot)
     if id_pot != -1:
