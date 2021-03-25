@@ -1,0 +1,11 @@
+<form action="/data" method = "POST">
+    <p>
+        <select name="Wifi" width="300px">
+            {% for o in option_list %}
+                <option value="{{ o.ssid }}" SELECTED>{{ o.ssid }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>Password <input type = "password" name = "Password" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
