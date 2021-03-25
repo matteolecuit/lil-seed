@@ -8,8 +8,3 @@ source-directory /etc/network/interfaces.d
 
 auto wlan0
 iface wlan0 inet dhcp
-
-iface wlan0-home inet dhcp
-    wpa-ssid m
-    wpa-psk 46a0f583db26465196a2c4f6dc64346eb989ed9a853c0070500cb139396a6ada
-    wireless-channel auto
