@@ -19,6 +19,7 @@ import { PotCardComponent } from './components/pot-card/pot-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
     declarations: [
         AppComponent,
