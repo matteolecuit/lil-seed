@@ -12,7 +12,10 @@ export class Data extends Entity {
   @property()
   type: number;
 
-  @property()
+  @property({dataType: 'float'})
+  data: number;
+
+  @property({default: () => new Date()})
   insert_date: Date;
 
   @property({
