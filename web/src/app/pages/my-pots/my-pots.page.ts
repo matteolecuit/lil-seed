@@ -21,6 +21,7 @@ export class MyPotsPage implements OnInit {
 
     ngOnInit(): void {
         this.apiPots.getPots().subscribe((data) => {
+            console.log(data);
             for (const d of data as any) {
                 this.tabPots.push({
                     id: d.id,
