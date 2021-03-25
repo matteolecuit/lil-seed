@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PotsService } from 'src/app/services/pots.service';
+import { PotsService } from '@services/pots.service';
 
 @Component({
     selector: 'app-my-pots',

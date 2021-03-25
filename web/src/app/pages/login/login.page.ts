@@ -18,10 +18,15 @@ export class LoginPage implements OnInit {
   }
 
   submitForm() {
-    let response = this.loginService.login(
+    this.loginService.login(
       this.loginForm.controls["login"].value, 
-      this.loginForm.controls["password"].value)
-    console.log(response);
+      this.loginForm.controls["password"].value
+    )
+    .toPromise()
+    .then(data => {
+      console.log(data);
+    })
+    
   }
 
   ngOnInit(): void {

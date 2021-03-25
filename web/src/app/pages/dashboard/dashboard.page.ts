@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { PotsService } from 'src/app/services/pots.service';
+import { PotsService } from '@services/pots.service';
 
 @Component({
     selector: 'app-dashboard',
