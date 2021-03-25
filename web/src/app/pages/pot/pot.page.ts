@@ -26,26 +26,26 @@ export class PotPage implements OnInit {
       stats: [
         {
           name: "humidity",
-          value: 18,
-          maxValue: 30,
+          value: 0,
+          maxValue: 50,
           color: "#54FBB1"
         },
         {
           name: "sun",
-          value: 29,
-          maxValue: 50,
+          value: 0,
+          maxValue: 340,
           color: "#F6B412"
         },
         {
           name: "water",
-          value: 10,
-          maxValue: 20,
+          value: 0,
+          maxValue: 700,
           color: "#FF44FF"
         },
         {
           name: "temperature",
-          value: 19,
-          maxValue: 30,
+          value: 0,
+          maxValue: 25,
           color: "#98F44B"
         }
       ]
@@ -56,12 +56,17 @@ export class PotPage implements OnInit {
     this.routeSub = this.route.params.subscribe(params => {
       this.dataPotsService.getById(params['id']).subscribe((response) => {
         this.data = response;
-        this.temperatures = this.data.filter(stat => stat.type == 0);
-        this.humidity = this.data.filter(stat => stat.type == 1);
-        this.water = this.data.filter(stat => stat.type == 2);
-        this.luminosity = this.data.filter(stat => stat.type == 3);
-        
-    });
+        this.temperatures = this.data.filter(stat => stat.type == 0).sort((a, b) => b.insert_date - a.insert_date).reverse();
+        this.humidity = this.data.filter(stat => stat.type == 1).sort((a, b) => b.insert_date - a.insert_date).reverse();
+        this.water = this.data.filter(stat => stat.type == 2).sort((a, b) => b.insert_date - a.insert_date).reverse();
+        this.luminosity = this.data.filter(stat => stat.type == 3).sort((a, b) => b.insert_date - a.insert_date).reverse();
+
+        this.pot.stats[0].value = this.humidity[0].data;
+        this.pot.stats[1].value = this.luminosity[0].data;
+        this.pot.stats[2].value = this.water[0].data;
+        this.pot.stats[3].value = this.temperatures[0].data;
+
+      });
     });
   }
 
