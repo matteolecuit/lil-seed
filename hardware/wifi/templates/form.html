@@ -2,7 +2,7 @@
     <p>
         <select name="Wifi" width="300px">
             {% for o in option_list %}
-                <option value="{{ o.ssid }}" SELECTED>{{ o.ssid }}</option>
+                <option value="{{ loop.index0 }}" SELECTED>{{ o.ssid }}</option>
             {% endfor %}
         </select>
     </p>
