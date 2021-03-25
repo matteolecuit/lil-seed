@@ -27,14 +27,11 @@ export class LoginPage implements OnInit {
     )
     .toPromise()
     .then(data => {
-      console.log(data);
       this.errorMessage = "";
       this.router.navigate(['dashboard']);
       localStorage.setItem('jwt', data.token);
-      console.log(localStorage);
     })
     .catch(error => {
-      console.warn("error");
       this.errorMessage = "Erreur lors de la connexion, veuillez réessayer";
     })
   }
