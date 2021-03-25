@@ -47,12 +47,7 @@ while True :
 	print("Luminosity:", luminosity, "\n")
 	
 	if(oldTemperature != temperature or oldHumidity != humidity or oldWater != water or oldLuminosity != luminosity ):
-		sendData({
-			'temperature' : temperature, 
-			'humidity': humidity,
-			'water' : water,
-			'luminosity' : luminosity
-		})
+		sendData([temperature, humidity, water, luminosity])
 	
 	oldTemperature = temperature
 	oldHumidity = humidity

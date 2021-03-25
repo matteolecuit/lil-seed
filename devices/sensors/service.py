@@ -29,7 +29,7 @@ def linkPotToUser(data):
         id_pot = addPotReq.json()['id']
         print(id_pot)
     except:
-        print(sys.exc_info()[0])
+        print(sys.exc_info())
         pass
 
 def sendData(data):
@@ -38,33 +38,22 @@ def sendData(data):
     global token
     global id_pot
     
-    try:
-        if len(token.strip()) <= 0:
-            
-            connUrl = "https://lilseed-back.serveurspaul.duckdns.org/users/login"
-            connData = {"username": USERNAME, "password": PASSWORD}
-            connReq = requests.post(connUrl, json = connData)
-            if len(connReq.json()["token"].strip()) > 0:
-                token = connReq.json()["token"]
+    print(id_pot)
+    if id_pot != -1:
+        try:
+            if len(token.strip()) <= 0:
+                
+                connUrl = "https://lilseed-back.serveurspaul.duckdns.org/users/login"
+                connData = {"username": USERNAME, "password": PASSWORD}
+                connReq = requests.post(connUrl, json = connData)
+                if connReq.json()["token"] is not None and len(connReq.json()["token"].strip()) > 0:
+                    token = connReq.json()["token"]
 
-        addPotUrl = "https://lilseed-back.serveurspaul.duckdns.org/pots/" + str(id_pot) + "/data"
-        addPotReq = requests.post(addPotUrl, json = data, headers = {"Authorization" : "Bearer " + token})
-        print(addPotReq.status_code)
-        print(addPotReq.json())
-    except:
-        print(traceback.format_exc())
-        pass
+            sendDataUrl = "https://lilseed-back.serveurspaul.duckdns.org/pots/" + str(id_pot) + "/data"
 
-# def loadData():
-#     file = open('data.txt', 'rb')
-#     data = pickle.load(file)
-#     file.close()
-#     return data
-        
-
-# def storeData(data):
-#     file = open('data.txt', 'wb')
-#     pickle.dump(data, file)
-#     file.close()
-
-# linkPotToUser({})
+            for i, d in enumerate(data):
+                sendDataReq = requests.post(sendDataUrl, json = {'type' : i, 'data': float(d)}, headers = {"Authorization" : "Bearer " + token})
+                print(sendDataReq.status_code)
+        except:
+            print(traceback.format_exc())
+            pass
