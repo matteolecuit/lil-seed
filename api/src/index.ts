@@ -33,8 +33,9 @@ if (require.main === module) {
       cors: {
         params: {
           origin: "*",
-          credentials: true,
-          maxAge: 86400
+          methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+          preflightContinue: false,
+          optionsSuccessStatus: 204
         }
       }
     },
