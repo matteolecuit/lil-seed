@@ -17,6 +17,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomePage } from './pages/home/home.page';
 import { PotCardComponent } from './components/pot-card/pot-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         AppRoutingModule,
         ChartsModule,
         HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [],
     bootstrap: [AppComponent],
