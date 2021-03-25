@@ -18,8 +18,11 @@ import { HomePage } from './pages/home/home.page';
 import { PotCardComponent } from './components/pot-card/pot-card.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 
-
+export function tokenGetter() {
+    return localStorage.getItem("jwt");
+}
 @NgModule({
     declarations: [
         AppComponent,
@@ -42,9 +45,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         ChartsModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ["localhost:3000", "lilseed-back.serveurspaul.duckdns.org"],
+                disallowedRoutes: ["/login"],
+            },
+        }),
     ],
     providers: [],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
