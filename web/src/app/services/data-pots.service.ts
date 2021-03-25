@@ -12,10 +12,10 @@ export class DataPotsService {
   }
 
   getById(id) {
-    return this.http.get(environment.API_URL + "/pots/" + id + "data");
+    return this.http.get(environment.API_URL + "pots/" + id + "/data");
   }
 
   deleteById(id) {
-    return this.http.delete(environment.API_URL + "/pots/" + id + "data");
+    return this.http.delete(environment.API_URL + "pots/" + id + "/data");
   }
 }

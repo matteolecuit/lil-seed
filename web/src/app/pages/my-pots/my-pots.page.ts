@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PotsService } from '@services/pots.service';
+import { UserPotService } from '@services/user-pot.service';
 
 @Component({
     selector: 'app-my-pots',
@@ -17,10 +18,11 @@ export class MyPotsPage implements OnInit {
 
     pot;
 
-    constructor(private apiPots: PotsService) {}
+    constructor(private userPotService: UserPotService) {}
 
     ngOnInit(): void {
-        this.apiPots.getPots().subscribe((data) => {
+        console.log(localStorage.getItem("jwt"));
+        this.userPotService.getPotsByIdUser(localStorage.getItem("userId")).subscribe((data) => {
             for (const d of data as any) {
                 this.tabPots.push({
                     id: d.id,
@@ -29,22 +31,5 @@ export class MyPotsPage implements OnInit {
                 });
             }
         });
-
-        this.apiPots
-            .postPot(this.name, this.macAddress)
-            .toPromise()
-            .then((data) => {
-                this.postId = data.id;
-                return data.id;
-            })
-            .then((postId) =>
-                this.apiPots.getPotById(postId).subscribe((data) => {
-                    return data;
-                })
-            )
-            .then((postId) => {
-                this.apiPots.deletePotById(this.postId).subscribe((data) => {
-                });
-            });
     }
 }

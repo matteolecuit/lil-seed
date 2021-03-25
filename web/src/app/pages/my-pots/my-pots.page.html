@@ -2,6 +2,6 @@
     <h1 class="page-title">My Pots</h1>
 
     <div class="pot-cards-wrapper">
-        <a *ngFor="let pot of tabPots; let index = index" routerLink="/pots/{{index}}"><ls-pot-card [pot]="pot"></ls-pot-card></a>
+        <a *ngFor="let pot of tabPots; let index = index" routerLink="/pots/{{pot.id}}"><ls-pot-card [pot]="pot"></ls-pot-card></a>
     </div>
 </div>

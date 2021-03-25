@@ -30,6 +30,7 @@ export class LoginPage implements OnInit {
       this.errorMessage = "";
       this.router.navigate(['dashboard']);
       localStorage.setItem('jwt', data.token);
+      localStorage.setItem('userId', data.id);
     })
     .catch(error => {
       this.errorMessage = "Erreur lors de la connexion, veuillez réessayer";
