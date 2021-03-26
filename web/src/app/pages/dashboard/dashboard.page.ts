@@ -90,11 +90,17 @@ export class DashboardPage implements OnInit {
                             }
                         }
                     });
-                    this.temperaturesChartData = [temperatureDataset];
-                    this.hygrometryChartData = [humidityDataset];
-                    this.waterChartData = [waterDataset];
-                    this.luminosityChartData = [luminosityDataset];
-
+                    if (!this.temperaturesChartData) {
+                        this.temperaturesChartData = [temperatureDataset];
+                        this.hygrometryChartData = [humidityDataset];
+                        this.waterChartData = [waterDataset];
+                        this.luminosityChartData = [luminosityDataset];
+                    } else {
+                        this.temperaturesChartData.push(temperatureDataset);
+                        this.hygrometryChartData.push(humidityDataset);
+                        this.waterChartData.push(waterDataset);
+                        this.luminosityChartData.push(luminosityDataset);
+                    }
                 })
             });
         })
