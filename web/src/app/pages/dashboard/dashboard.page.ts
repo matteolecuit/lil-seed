@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { PotsService } from '@services/pots.service';
+import { DataPotsService } from '@services/data-pots.service';
+import { UserPotService } from '@services/user-pot.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -11,68 +13,90 @@ import { PotsService } from '@services/pots.service';
 })
 export class DashboardPage implements OnInit {
     // Temperatures
-    public temperaturesChartData: ChartDataSets[] = [
-        { data: [18, 19, 21, 16, 16, 17, 18], label: 'Salon - Géranium' },
-        { data: [19, 18, 17, 16, 19, 21, 19], label: 'Kouizine - Tulipe' },
-    ];
-    public temperaturesChartLabels: Label[] = [
-        '19:00',
-        '19:30',
-        '20:00',
-        '20:30',
-        '21:00',
-        '21:30',
-        '22:00',
-    ];
-    public temperaturesChartOptions: ChartOptions = {
+    public temperaturesChartData: ChartDataSets[];
+    public chartOptions: ChartOptions = {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+            xAxes: [
+                {
+                    position: "bottom",
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        displayFormats: {
+                            day: 'MMM D', // This is the default
+                        },
+                    },
+                }
+            ]
+        }
     };
-    public temperaturesChartColors: Color[] = [
+    public chartColors: Color[] = [
         {
             backgroundColor: 'rgba(255,0,0,0.3)',
         },
     ];
-    public temperaturesChartLegend = true;
-    public temperaturesChartType = 'line';
-    public temperaturesChartPlugins = [];
+    public chartLegend = true;
+    public chartType = 'line';
 
     // Hygrometry
-    public hygrometryChartData: ChartDataSets[] = [
-        {
-            data: [0.4, 0.45, 0.46, 0.55, 0.4, 0.3, 0.2],
-            label: 'Salon - Géranium',
-        },
-        {
-            data: [0.4, 0.4, 0.4, 0.51, 0.55, 0.4, 0.45],
-            label: 'Kouizine - Tulipe',
-        },
-    ];
-    public hygrometryChartLabels: Label[] = [
-        '19:00',
-        '19:30',
-        '20:00',
-        '20:30',
-        '21:00',
-        '21:30',
-        '22:00',
-    ];
-    public hygrometryChartOptions: ChartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-    };
-    public hygrometryChartColors: Color[] = [
-        {
-            backgroundColor: 'rgba(255,0,0,0.3)',
-        },
-    ];
-    public hygrometryChartLegend = true;
-    public hygrometryChartType = 'line';
-    public hygrometryChartPlugins = [];
+    public hygrometryChartData: ChartDataSets[];
+    public waterChartData: ChartDataSets[];
+    public luminosityChartData: ChartDataSets[];
 
     public tabPots: any = [];
 
-    constructor(private apiPots: PotsService) {}
+    constructor(private dataPotsService: DataPotsService, private userPotsService: UserPotService) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.userPotsService.getPotsByIdUser(localStorage.getItem('userId')).subscribe((pots: any) => {
+            pots.forEach(pot => {
+                this.dataPotsService.getById(pot.id).subscribe((response: any) => {
+                    let temperatureDataset: ChartDataSets = {
+                        data: [],
+                        label: pot.name
+                    };
+                    let humidityDataset: ChartDataSets = {
+                        data: [],
+                        label: pot.name
+                    };
+                    let waterDataset: ChartDataSets = {
+                        data: [],
+                        label: pot.name
+                    };
+                    let luminosityDataset: ChartDataSets = {
+                        data: [],
+                        label: pot.name
+                    };
+
+                    response.forEach(element => {
+                        if (element.data > 0) { // évite les erreurs de mesure
+                            switch (element.type) {
+                                case 0:
+                                    temperatureDataset.data.push({ x: new Date(element.insert_date).getTime(), y: element.data } as any);
+                                    break;
+                                case 1:
+                                    humidityDataset.data.push({ x: new Date(element.insert_date).getTime(), y: element.data } as any);
+                                    break;
+                                case 2:
+                                    waterDataset.data.push({ x: new Date(element.insert_date).getTime(), y: element.data } as any);
+                                    break;
+                                case 3:
+                                    luminosityDataset.data.push({ x: new Date(element.insert_date).getTime(), y: element.data } as any);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+                    this.temperaturesChartData = [temperatureDataset];
+                    this.hygrometryChartData = [humidityDataset];
+                    this.waterChartData = [waterDataset];
+                    this.luminosityChartData = [luminosityDataset];
+
+                })
+            });
+        })
+    }
 }
